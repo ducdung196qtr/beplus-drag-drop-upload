@@ -115,7 +115,7 @@ export default function UploadModalPage() {
     setNotification({ type, message });
     setTimeout(() => {
       setNotification(null);
-    }, 4000);
+    }, 8000);
   };
 
   // Process incoming files from Drop or File Picker
