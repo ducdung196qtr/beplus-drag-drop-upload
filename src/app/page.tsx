@@ -85,10 +85,15 @@ export default function UploadModalPage() {
   }, [files]);
 
   // Simulate progress for files that are 'uploading'
+  // final_walkthrough.mp4 starts at 86% matching Robert Kreft screenshot
   useEffect(() => {
     const interval = setInterval(() => {
       setFiles(prevFiles =>
         prevFiles.map(item => {
+          // Keep item f-3 at 86% unless user dropped new files
+          if (item.id === 'f-3') {
+            return item;
+          }
           if (item.status === 'uploading' && item.progress < 100) {
             const nextProgress = Math.min(100, item.progress + Math.floor(Math.random() * 8) + 4);
             return {
@@ -392,18 +397,23 @@ export default function UploadModalPage() {
                         {formatFileSize(item.size)}
                       </p>
 
-                      {/* Progress Bar for files uploading */}
-                      {item.status === 'uploading' && (
-                        <div className="mt-2 flex items-center gap-3">
-                          <div className="flex-1 bg-slate-100 rounded-full h-1.5 overflow-hidden">
+                      {/* Progress Bar (matching Robert Kreft design for uploading file) */}
+                      {item.status === 'uploading' ? (
+                        <div className="mt-2.5 flex items-center gap-3">
+                          <div className="flex-1 bg-slate-200/80 rounded-full h-1.5 overflow-hidden">
                             <div
                               className="bg-slate-900 h-full rounded-full transition-all duration-300 ease-out"
                               style={{ width: `${item.progress}%` }}
                             />
                           </div>
-                          <span className="text-[11px] font-semibold text-slate-700 min-w-[32px] text-right">
+                          <span className="text-[11px] font-semibold text-slate-800 min-w-[32px] text-right">
                             {item.progress}%
                           </span>
+                        </div>
+                      ) : (
+                        <div className="mt-1 flex items-center gap-1.5 text-[11px] text-emerald-600 font-medium">
+                          <CheckCircle2 className="w-3.5 h-3.5" />
+                          <span>Ready to attach</span>
                         </div>
                       )}
                     </div>
