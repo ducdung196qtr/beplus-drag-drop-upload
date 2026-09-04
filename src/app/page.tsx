@@ -419,20 +419,20 @@ export default function UploadModalPage() {
                     </div>
                   </div>
 
-                  {/* Actions (Remove / Cancel) aligned neatly in fixed container */}
-                  <div className="flex items-center justify-end w-20 shrink-0">
+                  {/* Actions (Remove / Cancel) with consistent width and centered alignment */}
+                  <div className="flex items-center justify-center min-w-[70px] shrink-0">
                     {item.status === 'uploading' ? (
                       <button
                         onClick={() => handleRemoveFile(item.id)}
-                        className="w-7 h-7 rounded-full flex items-center justify-center text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-all border border-transparent hover:border-slate-200"
+                        className="w-8 h-8 rounded-full flex items-center justify-center text-slate-400 hover:text-slate-700 bg-slate-100/80 hover:bg-slate-200/80 transition-all border border-slate-200/50"
                         title="Cancel upload"
                       >
-                        <X className="w-4 h-4" />
+                        <X className="w-4 h-4 text-slate-500" />
                       </button>
                     ) : (
                       <button
                         onClick={() => handleRemoveFile(item.id)}
-                        className="px-3 py-1.5 text-xs font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition-all"
+                        className="w-full py-1.5 px-3 text-xs font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition-all text-center"
                       >
                         Remove
                       </button>
